@@ -9,23 +9,23 @@ import { toast } from 'react-toastify';
 function ContactForm() {
   const [input, setInput] = useState({
     name: '',
-    email: '',
+    from_name: '',
     message: '',
   });
   const [error, setError] = useState({
-    email: false,
+    from_name: false,
     required: false,
   });
 
   const checkRequired = () => {
-    if (input.email && input.message && input.name) {
+    if (input.from_name && input.message && input.name) {
       setError({ ...error, required: false });
     }
   };
 
   const handleSendMail = async (e) => {
     e.preventDefault();
-    if (!input.email || !input.message || !input.name) {
+    if (!input.from_name || !input.message || !input.name) {
       setError({ ...error, required: true });
       return;
     } else if (error.email) {
@@ -45,7 +45,7 @@ function ContactForm() {
         toast.success('Message sent successfully!');
         setInput({
           name: '',
-          email: '',
+          from_name: '',
           message: '',
         });
       };
@@ -86,10 +86,10 @@ function ContactForm() {
               maxLength="100"
               required={true}
               value={input.email}
-              onChange={(e) => setInput({ ...input, email: e.target.value })}
+              onChange={(e) => setInput({ ...input, from_name: e.target.value })}
               onBlur={() => {
                 checkRequired();
-                setError({ ...error, email: !isValidEmail(input.email) });
+                setError({ ...error, from_name: !isValidEmail(input.from_name) });
               }}
             />
             {error.email &&
